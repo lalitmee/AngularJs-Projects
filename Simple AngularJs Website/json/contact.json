@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Banglore Location",
+    "street": "JP Nagar, 1st Phase",
+    "pin": "Pin: 560078"
+  },
+
+  {
+    "id": 2,
+    "name": "Ahmedabad Location",
+    "street": "Kalopur Railway Station, Geeta Mandir Road",
+    "pin": "Pin: 380001"
+  },
+
+  {
+    "id": 3,
+    "name": "Moradabad Location",
+    "street": "Mahadev Ashram, Kalali Road",
+    "pin": "Pin: 244231"
+  }
+]

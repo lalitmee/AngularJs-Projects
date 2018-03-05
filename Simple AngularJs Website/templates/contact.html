@@ -1,0 +1,14 @@
+
+
+        <div class="row" ng-controller="contactCtrl">
+          <div class="col-lg-12">
+            <h2>Contact</h2>
+            <p>Please email us at <strong> support@computersolutions.fake</strong></p>
+            <h3>Locatoins</h3>
+            <ul class="location" ng-repeat="contact in contactData">
+            <li><span>{{ $index+1 }} :</span>  <strong>{{ contact.name }}</strong> </li>
+              <li>{{ contact.street }}</li>
+              <li>{{ contact.pin }}</li>
+            </ul>
+          </div>
+        </div>

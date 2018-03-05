@@ -1,0 +1,22 @@
+[
+  {
+   "id": 1,
+   "name": "Hardware Repair",
+   "description": "Nulla eros erat, gravida id consequat et, euismod vitae nulla. Vestibulum maximus odio in lacus placerat lobortis. Curabitur pulvinar, elit sit amet convallis faucibus, nisl enim hendrerit ex, elementum mollis enim mauris eget dolor. Aliquam tincidunt orci at ex luctus rhoncus. Mauris vehicula malesuada risus, id dictum neque semper id. In urna lacus, venenatis ut gravida sit amet, auctor congue velit. Praesent ac sagittis nisl. Vivamus nec libero at ante ornare molestie. Etiam vel orci in turpis iaculis maximus. Praesent erat libero, pulvinar eget lectus id, egestas sodales dui.",
+   "image": "computer-icon.png"
+  },
+
+  {
+   "id": 2,
+   "name": "Virus Protection",
+   "description": "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.",
+   "image": "virus-protection.png"
+  },
+
+  {
+   "id": 3,
+   "name": "System Tuneup",
+   "description": "Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.",
+   "image": "system-tuneup.png"
+  }
+]

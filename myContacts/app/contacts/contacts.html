@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row" ng-controller="ContactsCtrl">
+
+      <div data-alert ng-show="msg" class="alert-box">
+        {{ msg }}
+      </div>
+    <form ng-submit="addFormSubmit()" ng-show="addFormShow">
+      <h3>Add Contact</h3>
+      <div class="row">
+        <div class="col-lg-10">
+          <div class="row">
+            <div class="col-lg-6">
+              <label>Name:
+                <input type="text" ng-model="name" placeholder="Contact Name" required>
+              </label>
+            </div>
+            <div class="col-lg-6">
+              <label>Email:
+                <input type="text" ng-model="email" placeholder="Contact Email" required>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <label>Company:
+                <input type="text" ng-model="company" placeholder="Contact Company" required>
+              </label>
+            </div>
+            <div class="col-lg-6">
+              <label>Work Phone:
+                <input type="text" ng-model="work_phone" placeholder="Contact Work Phone" required>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <label>Mobile Phone:
+                <input type="text" ng-model="mobile_phone" placeholder="Contact mobile phone" required>
+              </label>
+            </div>
+            <div class="col-lg-6">
+              <label>Home Phone:
+                <input type="text" ng-model="home_phone" placeholder="Contact homw phone" required>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <label>Street Address:
+                <input type="text" ng-model="street_address" placeholder="Contact Address" required>
+              </label>
+            </div>
+            <div class="col-lg-6">
+              <label>City:
+                <input type="text" ng-model="city" placeholder="Contact City" required>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <label>State:
+                <input type="text" ng-model="state" placeholder="Contact State" required>
+              </label>
+            </div>
+            <div class="col-lg-6">
+              <label>Pin:
+                <input type="text" ng-model="pin" placeholder="Contact Pin" required>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="cancelButton">
+
+          <a class="btn btn-danger cancel" ng-click="hide()" ng-show="addFormShow">Cancel</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <input type="submit" value="Add Contact" class="btn btn-primary">
+        </div>
+      </div>
+    </form>
+    <hr ng-show="addFormShow">
+    <div class="col-lg-10">
+      <h3>Your Contacts {{ (contacts.length) }}</h3>
+      <table width="100%">
+        <thead>
+          <th width="25%">Name</th>
+          <th width="25%">Company</th>
+          <th width="25%">Email</th>
+          <th width="25%">Actions</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="contact in contacts">
+            <td> <a href="#">{{ contact.name }}</a> </td>
+            <td>{{ contact.company }}</td>
+            <td>{{ contact.email }}</td>
+            <td> <a class="btn btn-primary" ng-click="showEditForm(contact)">Edit</a>
+            <a class="btn btn-danger" ng-click="removeContact(contact)">Delete </a></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="col-sm-12 col-lg-2">
+        <a class="btn btn-info" ng-click="showAddForm()" ng-hide="addFormShow">Add New</a>
+
+      </div>
+  </div>
+
+
+</div>

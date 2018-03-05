@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ngClassifieds</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+    <link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body ng-app="ngClassifieds" ng-controller="ClassifiedCtrl">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <p><strong>ngClassifieds</strong></p>
+
+        <md-button ng-click="openSidenav()">
+          <md-icon class="mdi mdi-plus-circle"></md-icon>
+          New Classified
+        </md-button>
+
+        <md-button ng-click="showSearch =  true">
+          <md-icon class="mdi mdi-magnify"></md-icon>
+          Search
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <div class="search" layout="row" layout-align="center center" ng-show="showSearch">
+      <md-input-container>
+        <label>Enter Search Term</label>
+        <input type="text" ng-model="classifiedsFilter">
+      </md-input-container>
+
+      <md-input-container class="marginInput">
+        <label>Category</label>
+        <md-select ng-model="category">
+          <md-option ng-repeat="category in categories" value="{{ category }}">
+            {{ category }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <div class="clearButton">
+        <md-button
+          class="md-warn md-raised"
+          ng-click="classifiedsFilter =''; category='' ">
+        Clear
+        </md-button>
+      </div>
+
+    </div>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+    md-component-id="left">
+      <md-toolbar>
+        <h1 class="md-toolbar-tools">Add a Classified</h1>
+      </md-toolbar>
+
+      <md-content layout-padding>
+
+        <form>
+          <md-input-container>
+            <label for="title">Title</label>
+            <input type="text" id="title"
+              ng-model="classified.title"
+              md-autofocus>
+          </md-input-container>
+          <md-input-container>
+            <label for="price">Price</label>
+            <input type="text" id="price"
+              ng-model="classified.price">
+          </md-input-container>
+          <md-input-container>
+            <label for="description">Description</label>
+            <input type="text" id="description"
+              ng-model="classified.description">
+          </md-input-container>
+          <md-input-container>
+            <label for="image">Image Link</label>
+            <input type="text" id"image"
+              ng-model="classified.image">
+          </md-input-container>
+          <md-button ng-click="saveClassified(classified)" ng-if="!editing" class="md-primary md-raised md-cornered">
+            Save
+          </md-button>
+          <md-button ng-click="saveEdit()" ng-if="editing" class="md-primary md-raised md-cornered">
+            Save Edit
+          </md-button>
+          <md-button ng-click="closeSidenav()" class="md-warn md-raised md-cornered">
+            Cancel
+          </md-button>
+
+          <pre>{{ classified | json }}</pre>
+        </form>
+
+
+      </md-content>
+    </md-sidenav>
+
+    <md-content class="md-padding" layout="row" layout-wrap>
+      <md-card flex="30"
+        ng-repeat="classified in classifieds
+        | filter: classifiedsFilter
+        | filter: category"
+        class="classified">
+        <img ng-src="{{ classified.image }}" class="img-resp" alt="">
+        <md-card-content >
+          <div class="classified-info" ng-show="!showContact">
+            <h2 class="md-title">{{ classified.title }}</h2>
+            <h2>{{ classified.posted | date: 'longDate' }}</h2>
+            <h3>{{ classified.price | currency }}</h3>
+            <p class="item-description">{{ classified.description | limitTo: 200 }}</p>
+          </div>
+
+          <div class="classified-contact" ng-show="showContact">
+            <p><md-icon class="mdi mdi-account"></md-icon>{{ classified.contact.name }}</p>
+            <p><md-icon class="mdi mdi-phone"></md-icon>{{ classified.contact.phone }}</p>
+            <p><md-icon class="mdi mdi-email"></md-icon>{{ classified.contact.email }}</p>
+          </div>
+
+          <div layout="row">
+            <md-button
+              class="md-raised md-primary md-cornered"
+              ng-click="showContact = true"
+              ng-show="!showContact">
+              Contact
+            </md-button>
+            <md-button
+              class="md-raised md-warn md-cornered"
+              ng-click="showContact = false"
+              ng-show="showContact">
+              Details
+            </md-button>
+            <md-button
+              class="md-raised md-primary md-cornered"
+              ng-click="showAdmin = true"
+              ng-show="!showAdmin">
+              Admin
+            </md-button>
+            <md-button
+              class="md-raised md-warn md-cornered"
+              ng-click="showAdmin = false"
+              ng-show="showAdmin">
+              Close
+            </md-button>
+          </div>
+
+          <div class="classified-admin" ng-if="showAdmin">
+            <h3>Admin</h3>
+            <div layout="row">
+              <md-button ng-click="editClassified(classified)" class="md-primary">Edit</md-button>
+              <md-button ng-click="deleteClassified($event, classified)" class="md-warn">Delete</md-button>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-content>
+
+    <script src="node_modules/angular/angular.js" charset="utf-8"></script>
+    <script src="node_modules/angular-animate/angular-animate.js" charset="utf-8"></script>
+    <script src="node_modules/angular-aria/angular-aria.js" charset="utf-8"></script>
+    <script src="node_modules/angular-material/angular-material.js" charset="utf-8"></script>
+    <script src="scripts/app.js" charset="utf-8"></script>
+    <script src="scripts/classified.js" charset="utf-8"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDkl4y7KoBqZZTXXfmGnluWSKRseZn2LGc",
+        authDomain: "ngclassifiedsangular.firebaseapp.com",
+        databaseURL: "https://ngclassifiedsangular.firebaseio.com",
+        projectId: "ngclassifiedsangular",
+        storageBucket: "ngclassifiedsangular.appspot.com",
+        messagingSenderId: "401887295906"
+      };
+      firebase.initializeApp(config);
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js" charset="utf-8"></script>
+  </body>
+</html>
